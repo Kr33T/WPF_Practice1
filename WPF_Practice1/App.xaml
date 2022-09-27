@@ -14,7 +14,6 @@
         </Style>
         <ControlTemplate TargetType="Button" x:Key="btnTemplate">
             <Border CornerRadius="3" BorderBrush="SlateGray"  BorderThickness="1" Background="Aquamarine"/>
-            <
         </ControlTemplate>
     </Application.Resources>
 </Application>

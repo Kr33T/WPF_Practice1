@@ -12,7 +12,7 @@
             <ComboBoxItem>Знак зодиака</ComboBoxItem>
             <ComboBoxItem>Восточный гороскоп</ComboBoxItem>
         </ComboBox>
-        <Label Name="actionL" Content="Выберите действие" Margin="10,47,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Name="actionL" Content="Выберите действие" Margin="10,47,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily=""/>
         <Button Width="80" Height="20" Foreground="Black" Template="{StaticResource btnTemplate}" Content="Определить" Margin="165,74,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Name="defineBTN" Click="defineBTN_Click"/>
         <Canvas Margin="10,117,300,117">
             <Canvas Name="zodiacC" Width="500" Background="White">
