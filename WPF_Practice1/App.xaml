@@ -11,13 +11,10 @@
             <Setter Property="Foreground" Value="#403866"/>
         </Style>
         <Style x:Key="labelStyle" TargetType="Label">
-            <Setter Property="Foreground" Value="#403866"/>
+            <Setter Property="Foreground" Value="#8F8EA1"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontFamily" Value="Century Gothic"/>
-        </Style>
-        <Style x:Key="defineBTN" TargetType="Button">
-            <Setter Property="Foreground" Value="Black"/>
         </Style>
         <Style x:Key="TextBoxesStyle" TargetType="TextBox">
             <Setter Property="Control.Template">
