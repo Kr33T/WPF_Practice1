@@ -41,17 +41,17 @@ namespace WPF_Practice1
             {
                 case 0:
                     titleL.Content = "Определение знака зодиака";
-                    zodiacC.Visibility = Visibility.Visible;
-                    vostGorC.Visibility = Visibility.Hidden;
-                    Canvas.SetZIndex(zodiacC, 0);
-                    zodiacC.Margin = new Thickness(0);
+                    zodiacSP.Visibility = Visibility.Visible;
+                    vostGorSP.Visibility = Visibility.Collapsed;
+                    yearTB.Text = "";
+                    dayOfBirthTB.Text = "";
                     break;
                 case 1:
                     titleL.Content = "Определение восточного гороскопа";
-                    zodiacC.Visibility = Visibility.Hidden;
-                    vostGorC.Visibility = Visibility.Visible;
-                    Canvas.SetZIndex(vostGorC, 0);
-                    vostGorC.Margin = new Thickness(0);
+                    zodiacSP.Visibility = Visibility.Collapsed;
+                    vostGorSP.Visibility = Visibility.Visible;
+                    yearTB.Text = "";
+                    dayOfBirthTB.Text = "";
                     break;
             }
         }
@@ -89,7 +89,7 @@ namespace WPF_Practice1
                                 defineZZ(1, 20, 21, 31, "Козерог", "Водолей");
                                 break;
                             case 1:
-                                defineZZ(1, 18, 19, 29, "Водолей", "Рыбы");
+                                defineZZ(1, 18, 19, 28, "Водолей", "Рыбы");
                                 break;
                             case 2:
                                 defineZZ(1, 20, 21, 31, "Рыбы", "Овен");
@@ -129,46 +129,49 @@ namespace WPF_Practice1
                     }
                     break;
                 case 1:
-                    int year = Convert.ToInt32(yearTB.Text);
-                    year = year % 12;
-                    switch (year)
+                    if (!String.IsNullOrEmpty(yearTB.Text))
                     {
-                        case 0:
-                            MessageBox.Show("Вы - Обезьяна", "Результат");
-                            break;
-                        case 1:
-                            MessageBox.Show("Вы - Петух", "Результат");
-                            break;
-                        case 2:
-                            MessageBox.Show("Вы - Собака", "Результат");
-                            break;
-                        case 3:
-                            MessageBox.Show("Вы - Свинья", "Результат");
-                            break;
-                        case 4:
-                            MessageBox.Show("Вы - Крыса", "Результат");
-                            break;
-                        case 5:
-                            MessageBox.Show("Вы - Бык", "Результат");
-                            break;
-                        case 6:
-                            MessageBox.Show("Вы - Тигр", "Результат");
-                            break;
-                        case 7:
-                            MessageBox.Show("Вы - Кролик", "Результат");
-                            break;
-                        case 8:
-                            MessageBox.Show("Вы - Дракон", "Результат");
-                            break;
-                        case 9:
-                            MessageBox.Show("Вы - Змея", "Результат");
-                            break;
-                        case 10:
-                            MessageBox.Show("Вы - Лошадь", "Результат");
-                            break;
-                        case 11:
-                            MessageBox.Show("Вы - Коза", "Результат");
-                            break;
+                        int year = Convert.ToInt32(yearTB.Text);
+                        year = year % 12;
+                        switch (year)
+                        {
+                            case 0:
+                                MessageBox.Show("Вы - Обезьяна", "Результат");
+                                break;
+                            case 1:
+                                MessageBox.Show("Вы - Петух", "Результат");
+                                break;
+                            case 2:
+                                MessageBox.Show("Вы - Собака", "Результат");
+                                break;
+                            case 3:
+                                MessageBox.Show("Вы - Свинья", "Результат");
+                                break;
+                            case 4:
+                                MessageBox.Show("Вы - Крыса", "Результат");
+                                break;
+                            case 5:
+                                MessageBox.Show("Вы - Бык", "Результат");
+                                break;
+                            case 6:
+                                MessageBox.Show("Вы - Тигр", "Результат");
+                                break;
+                            case 7:
+                                MessageBox.Show("Вы - Кролик", "Результат");
+                                break;
+                            case 8:
+                                MessageBox.Show("Вы - Дракон", "Результат");
+                                break;
+                            case 9:
+                                MessageBox.Show("Вы - Змея", "Результат");
+                                break;
+                            case 10:
+                                MessageBox.Show("Вы - Лошадь", "Результат");
+                                break;
+                            case 11:
+                                MessageBox.Show("Вы - Коза", "Результат");
+                                break;
+                        }
                     }
                     break;
             }
@@ -178,13 +181,14 @@ namespace WPF_Practice1
         {
             if (!String.IsNullOrEmpty(dayOfBirthTB.Text))
             {
-                if(!Regex.IsMatch(dayOfBirthTB.Text, @"[0-9]"))
+                if(!Regex.IsMatch(dayOfBirthTB.Text, @"^[0-9]+$"))
                 {
                     dayOfBirthTB.Text = "";
                 }
                 if(dayOfBirthTB.Text.Length > 2)
                 {
-                    MessageBox.Show("Введено слишком много символов", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    dayOfBirthTB.Text = dayOfBirthTB.Text.Remove(dayOfBirthTB.Text.Length - 1);
+                    //MessageBox.Show("Введено слишком много символов", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
@@ -193,13 +197,14 @@ namespace WPF_Practice1
         {
             if (!String.IsNullOrEmpty(yearTB.Text))
             {
-                if (!Regex.IsMatch(yearTB.Text, @"[0-9]"))
+                if (!Regex.IsMatch(yearTB.Text, @"^[0-9]+$"))
                 {
                     yearTB.Text = "";
                 }
                 if (yearTB.Text.Length > 4)
                 {
-                    MessageBox.Show("Введено слишком много символов", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    yearTB.Text = yearTB.Text.Remove(yearTB.Text.Length - 1);
+                    //MessageBox.Show("Введено слишком много символов", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }

@@ -5,39 +5,62 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_Practice1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="220" Width="370" ResizeMode="NoResize">
+        Title="MainWindow" Height="220" Width="365" ResizeMode="NoResize" ShowInTaskbar="False"
+    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <Grid Loaded="Grid_Loaded">
-        <Label Name="titleL" Style="{StaticResource Title}"/>
-        <ComboBox Width="150" Name="pickerCB" HorizontalAlignment="Left" Margin="10,73,0,0" VerticalAlignment="Top" SelectionChanged="pickerCB_SelectionChanged">
-            <ComboBoxItem>Знак зодиака</ComboBoxItem>
-            <ComboBoxItem>Восточный гороскоп</ComboBoxItem>
-        </ComboBox>
-        <Label Name="actionL" Content="Выберите действие" Margin="10,47,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily=""/>
-        <Button Width="80" Height="20" Foreground="Black" Template="{StaticResource btnTemplate}" Content="Определить" Margin="165,74,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Name="defineBTN" Click="defineBTN_Click"/>
-        <Canvas Margin="10,117,300,117">
-            <Canvas Name="zodiacC" Width="500" Background="White">
-                <Label Content="Введите день своего рождения"/>
-                <TextBox Width="35" Canvas.Left="188" Canvas.Top="4" Name="dayOfBirthTB" TextChanged="dayOfBirthTB_TextChanged" HorizontalAlignment="Center" Height="17" VerticalAlignment="Top"/>
-                <Label Content="Выберите месяц своего рождения" HorizontalAlignment="Center" Canvas.Top="26" VerticalAlignment="Center"/>
-                <ComboBox Canvas.Left="200" Canvas.Top="28" Name="monthPickerCB" Width="100">
-                    <ComboBoxItem>Январь</ComboBoxItem>
-                    <ComboBoxItem>Февраль</ComboBoxItem>
-                    <ComboBoxItem>Март</ComboBoxItem>
-                    <ComboBoxItem>Апрель</ComboBoxItem>
-                    <ComboBoxItem>Май</ComboBoxItem>
-                    <ComboBoxItem>Июнь</ComboBoxItem>
-                    <ComboBoxItem>Июль</ComboBoxItem>
-                    <ComboBoxItem>Август</ComboBoxItem>
-                    <ComboBoxItem>Сентябрь</ComboBoxItem>
-                    <ComboBoxItem>Октябрь</ComboBoxItem>
-                    <ComboBoxItem>Ноябрь</ComboBoxItem>
-                    <ComboBoxItem>Декабрь</ComboBoxItem>
-                </ComboBox>
-            </Canvas>
-            <Canvas Name="vostGorC" Background="White">
-                <Label Content="Введите год своего рождения"/>
-                <TextBox Width="70" Canvas.Left="175" Canvas.Top="4" HorizontalAlignment="Left" Name="yearTB" TextChanged="yearTB_TextChanged" VerticalAlignment="Center"/>
-            </Canvas>
-        </Canvas>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="112"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <Label Name="titleL" Style="{StaticResource Title}" HorizontalAlignment="Center" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Label Style="{StaticResource labelStyle}" Name="actionL" VerticalAlignment="Center" Content="Выберите действие"/>
+            <Button Template="{StaticResource btnTemplate}" Width="80" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" Background="#827FFE" Click="defineBTN_Click">Определить</Button>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2">
+            <ComboBox Width="150" Height="22" Margin="6,0,0,0"  Name="pickerCB" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" SelectionChanged="pickerCB_SelectionChanged">
+                <ComboBoxItem>Знак зодиака</ComboBoxItem>
+                <ComboBoxItem>Восточный гороскоп</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3">
+
+            <StackPanel Name="zodiacSP">
+                <StackPanel Orientation="Horizontal">
+                    <Label Style="{StaticResource labelStyle}"  Content="Введите день рождения"/>
+                    <TextBox HorizontalContentAlignment="Center" Width="35" Name="dayOfBirthTB" TextChanged="dayOfBirthTB_TextChanged" HorizontalAlignment="Left" Height="17" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Style="{StaticResource labelStyle}" Content="Выберите месяц рождения" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <ComboBox Name="monthPickerCB" Width="100" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <ComboBoxItem>Январь</ComboBoxItem>
+                        <ComboBoxItem>Февраль</ComboBoxItem>
+                        <ComboBoxItem>Март</ComboBoxItem>
+                        <ComboBoxItem>Апрель</ComboBoxItem>
+                        <ComboBoxItem>Май</ComboBoxItem>
+                        <ComboBoxItem>Июнь</ComboBoxItem>
+                        <ComboBoxItem>Июль</ComboBoxItem>
+                        <ComboBoxItem>Август</ComboBoxItem>
+                        <ComboBoxItem>Сентябрь</ComboBoxItem>
+                        <ComboBoxItem>Октябрь</ComboBoxItem>
+                        <ComboBoxItem>Ноябрь</ComboBoxItem>
+                        <ComboBoxItem>Декабрь</ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Name="vostGorSP" Orientation="Horizontal">
+                <Label Style="{StaticResource labelStyle}" Content="Введите год рождения"/>
+                <TextBox Height="16" HorizontalContentAlignment="Center" Width="70" HorizontalAlignment="Left" Name="yearTB" TextChanged="yearTB_TextChanged" VerticalAlignment="Center"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>

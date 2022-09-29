@@ -6,14 +6,34 @@
     <Application.Resources>
         <Style x:Key="Title" TargetType="Label">
             <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontSize" Value="18"/>
             <Setter Property="FontFamily" Value="Ubuntu"/>
+            <Setter Property="Foreground" Value="#403866"/>
+        </Style>
+        <Style x:Key="labelStyle" TargetType="Label">
+            <Setter Property="Foreground" Value="#403866"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Century Gothic"/>
         </Style>
         <Style x:Key="defineBTN" TargetType="Button">
             <Setter Property="Foreground" Value="Black"/>
         </Style>
+        <Style x:Key="TextBoxesStyle" TargetType="TextBox">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border CornerRadius="10"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <ControlTemplate TargetType="Button" x:Key="btnTemplate">
-            <Border CornerRadius="3" BorderBrush="SlateGray"  BorderThickness="1" Background="Aquamarine"/>
+            <Border CornerRadius="3" Background="#827FFE">
+                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+
         </ControlTemplate>
     </Application.Resources>
 </Application>
