@@ -19,9 +19,6 @@ using System.Diagnostics;
 
 namespace WPF_Practice1
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -258,45 +255,56 @@ namespace WPF_Practice1
 
             StreamWriter sw = new StreamWriter(path, false, Encoding.Default);
 
+            int j = 0;
+
             foreach (var line in lines)
             {
                 string[] parts = line.Split(';');
 
-                sw.Write($"{parts[0]};{parts[1]};{parts[2]}");
-
-                for (int i = 0; i < temp.Length; i++)
+                if(j == 0)
                 {
-                    if (Regex.IsMatch(parts[i], @"^[0-9]+$"))
-                    {
-                        temp[i] = parts[i];
-                    }
-                    else
-                    {
-                        temp[i] = "";
-                    }
+                    sw.Write($"{parts[0]};{parts[1]};{parts[2]};ЗЗ;ВГ");
+                    j++;
+                    sw.WriteLine();
                 }
-
-                if (!String.IsNullOrEmpty(temp[0]) && !String.IsNullOrEmpty(temp[1]))
+                else
                 {
-                    int countDays = DateTime.DaysInMonth(DateTime.Now.Year, Convert.ToInt32(temp[1]) - 1);
-                    if (Convert.ToInt32(temp[0]) <= countDays)
+                    sw.Write($"{parts[0]};{parts[1]};{parts[2]}");
+
+                    for (int i = 0; i < temp.Length; i++)
                     {
-                        sw.Write($";{defineZodiac(Convert.ToInt32(temp[1]) - 1, temp[0])}");
+                        if (Regex.IsMatch(parts[i], @"^[0-9]+$"))
+                        {
+                            temp[i] = parts[i];
+                        }
+                        else
+                        {
+                            temp[i] = "";
+                        }
+                    }
+
+                    if (!String.IsNullOrEmpty(temp[0]) && !String.IsNullOrEmpty(temp[1]))
+                    {
+                        int countDays = DateTime.DaysInMonth(DateTime.Now.Year, Convert.ToInt32(temp[1]) - 1);
+                        if (Convert.ToInt32(temp[0]) <= countDays)
+                        {
+                            sw.Write($";{defineZodiac(Convert.ToInt32(temp[1]) - 1, temp[0])}");
+                        }
+                        else
+                        {
+                            sw.Write($";");
+                        }
                     }
                     else
                     {
                         sw.Write($";");
                     }
+                    if (!String.IsNullOrEmpty(temp[2]))
+                    {
+                        sw.Write($";{defineEastG(temp[2])}");
+                    }
+                    sw.WriteLine();
                 }
-                else
-                {
-                    sw.Write($";");
-                }
-                if (!String.IsNullOrEmpty(temp[2]))
-                {
-                    sw.Write($";{defineEastG(temp[2])}");
-                }
-                sw.WriteLine();
             }
 
             sw.Close();
