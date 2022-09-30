@@ -228,7 +228,7 @@ namespace WPF_Practice1
 
         private void instructionBTN_Click (object sender, EventArgs e)
         {
-            MessageBox.Show("Все данные, которые необходимо ввести - вводятся цифрами. \nЛюбые другие символы вводиться не будут", "Справка", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Все данные, которые необходимо ввести - вводятся цифрами. \nЛюбые другие символы вводиться не будут\n\nПри использовании файла необходимо выбрать необходимый файл нажав на кнопку \"Открыть файл\", в результате чего данный файл перезапишется.\nЧтобы открыть данный файл необходимо нажать на появившуюся кнопку \"Результат\"", "Справка", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         string path;
@@ -292,12 +292,12 @@ namespace WPF_Practice1
                         }
                         else
                         {
-                            sw.Write($";");
+                            sw.Write($";-");
                         }
                     }
                     else
                     {
-                        sw.Write($";");
+                        sw.Write($";-");
                     }
                     if (!String.IsNullOrEmpty(temp[2]))
                     {
