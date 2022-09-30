@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Text.RegularExpressions;
+using System.IO;
+using System.Diagnostics;
 
 namespace WPF_Practice1
 {
@@ -29,6 +31,7 @@ namespace WPF_Practice1
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
+            writeInFileBTN.Visibility = Visibility.Collapsed;
             this.Title = "Практическая работа #1";
             pickerCB.SelectedIndex = 0;
 
@@ -56,24 +59,22 @@ namespace WPF_Practice1
             }
         }
 
-        private void defineZZ(int a, int b, int c, int d, string sign1, string sign2)
+        private string defineZZ(int a, int b, int c, int d, string sign1, string sign2, string dayT)
         {
-            int day = Convert.ToInt32(dayOfBirthTB.Text);
+            string res = "";
+            int day = Convert.ToInt32(dayT);
             if (day >= a && day <= b)
             {
-                MessageBox.Show($"Знак зодиака - {sign1}", "Результат");
+                res = sign1;
             }
             else
             {
                 if (day >= c && day <= d)
                 {
-                    MessageBox.Show($"Знак зодиака - {sign2}", "Результат");
-                }
-                else
-                {
-                    MessageBox.Show("Введено неверное значение!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    res = sign2;
                 }
             }
+            return res;
         }
 
         private void defineBTN_Click(object sender, RoutedEventArgs e)
@@ -83,45 +84,7 @@ namespace WPF_Practice1
                 case 0:
                     if (!String.IsNullOrEmpty(dayOfBirthTB.Text))
                     {
-                        switch (monthPickerCB.SelectedIndex)
-                        {
-                            case 0:
-                                defineZZ(1, 20, 21, 31, "Козерог", "Водолей");
-                                break;
-                            case 1:
-                                defineZZ(1, 18, 19, 28, "Водолей", "Рыбы");
-                                break;
-                            case 2:
-                                defineZZ(1, 20, 21, 31, "Рыбы", "Овен");
-                                break;
-                            case 3:
-                                defineZZ(1, 20, 21, 30, "Овен", "Телец");
-                                break;
-                            case 4:
-                                defineZZ(1, 20, 21, 31, "Телец", "Близнецы");
-                                break;
-                            case 5:
-                                defineZZ(1, 21, 22, 30, "Близнецы", "Рак");
-                                break;
-                            case 6:
-                                defineZZ(1, 22, 23, 31, "Рак", "Лев");
-                                break;
-                            case 7:
-                                defineZZ(1, 22, 23, 31, "Лев", "Дева");
-                                break;
-                            case 8:
-                                defineZZ(1, 23, 24, 30, "Дева", "Весы");
-                                break;
-                            case 9:
-                                defineZZ(1, 23, 24, 31, "Весы", "Скорпион");
-                                break;
-                            case 10:
-                                defineZZ(1, 22, 23, 30, "Скорпион", "Стрелец");
-                                break;
-                            case 11:
-                                defineZZ(1, 21, 22, 31, "Стрелец", "Козерог");
-                                break;
-                        }
+                        MessageBox.Show($"Знак зодиака - {defineZodiac(monthPickerCB.SelectedIndex, dayOfBirthTB.Text)}", "Результат");
                     }
                     else
                     {
@@ -131,50 +94,106 @@ namespace WPF_Practice1
                 case 1:
                     if (!String.IsNullOrEmpty(yearTB.Text))
                     {
-                        int year = Convert.ToInt32(yearTB.Text);
-                        year = year % 12;
-                        switch (year)
-                        {
-                            case 0:
-                                MessageBox.Show("Вы - Обезьяна", "Результат");
-                                break;
-                            case 1:
-                                MessageBox.Show("Вы - Петух", "Результат");
-                                break;
-                            case 2:
-                                MessageBox.Show("Вы - Собака", "Результат");
-                                break;
-                            case 3:
-                                MessageBox.Show("Вы - Свинья", "Результат");
-                                break;
-                            case 4:
-                                MessageBox.Show("Вы - Крыса", "Результат");
-                                break;
-                            case 5:
-                                MessageBox.Show("Вы - Бык", "Результат");
-                                break;
-                            case 6:
-                                MessageBox.Show("Вы - Тигр", "Результат");
-                                break;
-                            case 7:
-                                MessageBox.Show("Вы - Кролик", "Результат");
-                                break;
-                            case 8:
-                                MessageBox.Show("Вы - Дракон", "Результат");
-                                break;
-                            case 9:
-                                MessageBox.Show("Вы - Змея", "Результат");
-                                break;
-                            case 10:
-                                MessageBox.Show("Вы - Лошадь", "Результат");
-                                break;
-                            case 11:
-                                MessageBox.Show("Вы - Коза", "Результат");
-                                break;
-                        }
+                        MessageBox.Show($"Вы - {defineEastG(yearTB.Text)}", "Результат");
                     }
                     break;
             }
+        }
+
+        string defineZodiac(int month, string day)
+        {
+            string res = "";
+
+            switch (month)
+            {
+                case 0:
+                    res = defineZZ(1, 20, 21, 31, "Козерог", "Водолей", day);
+                    break;
+                case 1:
+                    res = defineZZ(1, 18, 19, 29, "Водолей", "Рыбы", day);
+                    break;
+                case 2:
+                    res = defineZZ(1, 20, 21, 31, "Рыбы", "Овен", day);
+                    break;
+                case 3:
+                    res = defineZZ(1, 20, 21, 30, "Овен", "Телец", day);
+                    break;
+                case 4:
+                    res = defineZZ(1, 20, 21, 31, "Телец", "Близнецы", day);
+                    break;
+                case 5:
+                    res = defineZZ(1, 21, 22, 30, "Близнецы", "Рак", day);
+                    break;
+                case 6:
+                    res = defineZZ(1, 22, 23, 31, "Рак", "Лев", day);
+                    break;
+                case 7:
+                    res = defineZZ(1, 22, 23, 31, "Лев", "Дева", day);
+                    break;
+                case 8:
+                    res = defineZZ(1, 23, 24, 30, "Дева", "Весы", day);
+                    break;
+                case 9:
+                    res = defineZZ(1, 23, 24, 31, "Весы", "Скорпион", day);
+                    break;
+                case 10:
+                    res = defineZZ(1, 22, 23, 30, "Скорпион", "Стрелец", day);
+                    break;
+                case 11:
+                    res = defineZZ(1, 21, 22, 31, "Стрелец", "Козерог", day);
+                    break;
+            }
+
+            return res;
+        }
+
+        string defineEastG(string yearSTR)
+        {
+            string res = "";
+
+            int year = Convert.ToInt32(yearSTR);
+            year = year % 12;
+            switch (year)
+            {
+                case 0:
+                    res = "Обезьяна";
+                    break;
+                case 1:
+                    res = "Петух";
+                    break;
+                case 2:
+                    res = "Собака";
+                    break;
+                case 3:
+                    res = "Свинья";
+                    break;
+                case 4:
+                    res = "Крыса";
+                    break;
+                case 5:
+                    res = "Бык";
+                    break;
+                case 6:
+                    res = "Тигр";
+                    break;
+                case 7:
+                    res = "Кролик";
+                    break;
+                case 8:
+                    res = "Дракон";
+                    break;
+                case 9:
+                    res = "Змея";
+                    break;
+                case 10:
+                    res = "Лошадь";
+                    break;
+                case 11:
+                    res = "Коза";
+                    break;
+            }
+
+            return res;
         }
 
         private void dayOfBirthTB_TextChanged(object sender, TextChangedEventArgs e)
@@ -185,10 +204,11 @@ namespace WPF_Practice1
                 {
                     dayOfBirthTB.Text = "";
                 }
-                if(dayOfBirthTB.Text.Length > 2)
+                int countDays = DateTime.DaysInMonth(DateTime.Now.Year, monthPickerCB.SelectedIndex + 1);
+                if(Convert.ToInt32(dayOfBirthTB.Text) > countDays)
                 {
-                    dayOfBirthTB.Text = dayOfBirthTB.Text.Remove(dayOfBirthTB.Text.Length - 1);
-                    //MessageBox.Show("Введено слишком много символов", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    dayOfBirthTB.Text = "";
+                    MessageBox.Show("Слишком большое количество дней!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
@@ -207,6 +227,89 @@ namespace WPF_Practice1
                     //MessageBox.Show("Введено слишком много символов", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+        }
+
+        private void instructionBTN_Click (object sender, EventArgs e)
+        {
+            MessageBox.Show("Все данные, которые необходимо ввести - вводятся цифрами. \nЛюбые другие символы вводиться не будут", "Справка", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        string path;
+
+        private void openFileBTN_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog openFileDlg = new Microsoft.Win32.OpenFileDialog();
+
+            var result = openFileDlg.ShowDialog();
+
+            if (result == true)
+            {
+                path = openFileDlg.FileName;
+            }
+            readData();
+
+            writeInFileBTN.Visibility = Visibility.Visible;
+        }
+
+        void readData()
+        {
+            var lines = File.ReadAllLines(path, Encoding.Default);
+            string[] temp = new string[3];
+
+            StreamWriter sw = new StreamWriter(path, false, Encoding.Default);
+
+            foreach (var line in lines)
+            {
+                string[] parts = line.Split(';');
+
+                sw.Write($"{parts[0]};{parts[1]};{parts[2]}");
+
+                for (int i = 0; i < temp.Length; i++)
+                {
+                    if (Regex.IsMatch(parts[i], @"^[0-9]+$"))
+                    {
+                        temp[i] = parts[i];
+                    }
+                    else
+                    {
+                        temp[i] = "";
+                    }
+                }
+
+                if (!String.IsNullOrEmpty(temp[0]) && !String.IsNullOrEmpty(temp[1]))
+                {
+                    int countDays = DateTime.DaysInMonth(DateTime.Now.Year, Convert.ToInt32(temp[1]) - 1);
+                    if (Convert.ToInt32(temp[0]) <= countDays)
+                    {
+                        sw.Write($";{defineZodiac(Convert.ToInt32(temp[1]) - 1, temp[0])}");
+                    }
+                    else
+                    {
+                        sw.Write($";");
+                    }
+                }
+                else
+                {
+                    sw.Write($";");
+                }
+                if (!String.IsNullOrEmpty(temp[2]))
+                {
+                    sw.Write($";{defineEastG(temp[2])}");
+                }
+                sw.WriteLine();
+            }
+
+            sw.Close();
+        }
+
+        private void writeInFileBTN_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start(path);
+        }
+
+        private void monthPickerCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dayOfBirthTB.Text = "";
         }
     }
 }

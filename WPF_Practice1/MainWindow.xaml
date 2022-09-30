@@ -12,7 +12,8 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="112"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="90"/>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0">
@@ -20,18 +21,24 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Button Template="{StaticResource btnTemplate}" FontFamily="Century Gothic" Width="100" Margin="4 0 0 0" Height="20" Foreground="White" Name="openFileBTN"  Click="openFileBTN_Click">Открыть файл</Button>
+            <Button Template="{StaticResource btnTemplate}" FontFamily="Century Gothic" Width="70" Margin="10 0 0 0" Foreground="White" Height="20" Name="writeInFileBTN" Click="writeInFileBTN_Click">Результат</Button>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
             <Label Style="{StaticResource labelStyle}" Name="actionL" VerticalAlignment="Center" Content="Выберите действие"/>
-            <Button Template="{StaticResource btnTemplate}" Width="80" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" Background="#827FFE" Click="defineBTN_Click">Определить</Button>
+            <Button Template="{StaticResource btnTemplate}" FontFamily="Century Gothic" Width="80" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" Background="#827FFE" Click="defineBTN_Click">Определить</Button>
         </StackPanel>
 
-        <StackPanel Grid.Row="2">
+        <StackPanel Grid.Row="3" Orientation="Horizontal">
             <ComboBox Width="150" Height="22" Margin="6,0,0,0"  Name="pickerCB" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" SelectionChanged="pickerCB_SelectionChanged">
                 <ComboBoxItem>Знак зодиака</ComboBoxItem>
                 <ComboBoxItem>Восточный гороскоп</ComboBoxItem>
             </ComboBox>
+            <Button Margin="10 0 0 0" Height="18" Width="18" Name="instructionBTN" Click="instructionBTN_Click" Template="{StaticResource btnInstr}" FontFamily="Century Gothic" Foreground="White">?</Button>
         </StackPanel>
 
-        <StackPanel Grid.Row="3">
+        <StackPanel Grid.Row="4">
 
             <StackPanel Name="zodiacSP">
                 <StackPanel Orientation="Horizontal">
@@ -40,7 +47,7 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Style="{StaticResource labelStyle}" Content="Выберите месяц рождения" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <ComboBox Name="monthPickerCB" Width="100" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <ComboBox Name="monthPickerCB" Width="100" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" SelectionChanged="monthPickerCB_SelectionChanged">
                         <ComboBoxItem>Январь</ComboBoxItem>
                         <ComboBoxItem>Февраль</ComboBoxItem>
                         <ComboBoxItem>Март</ComboBoxItem>

@@ -32,5 +32,12 @@
             </Border>
 
         </ControlTemplate>
+        <ControlTemplate TargetType="Button" x:Key="btnInstr">
+            <Border CornerRadius="10" Background="#827FFE">
+                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+
+        </ControlTemplate>
     </Application.Resources>
 </Application>
